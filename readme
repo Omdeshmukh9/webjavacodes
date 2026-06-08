@@ -1,0 +1,31 @@
+CREATE DATABASE onlineshopping;
+USE onlineshopping;
+
+CREATE TABLE user (
+    username VARCHAR(50) PRIMARY KEY,
+    password VARCHAR(100) NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    city VARCHAR(100)
+);
+
+CREATE TABLE category (
+    categoryId INT PRIMARY KEY AUTO_INCREMENT,
+    categoryName VARCHAR(100) NOT NULL,
+    categoryImageUrl VARCHAR(255),
+    categoryDescription VARCHAR(255)
+);
+
+CREATE TABLE product (
+    productId INT PRIMARY KEY AUTO_INCREMENT,
+    categoryId INT NOT NULL,
+    productName VARCHAR(100) NOT NULL,
+    productDescription VARCHAR(255),
+    productImageUrl VARCHAR(255),
+
+    CONSTRAINT fk_product_category
+        FOREIGN KEY (categoryId)
+        REFERENCES category(categoryId)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
